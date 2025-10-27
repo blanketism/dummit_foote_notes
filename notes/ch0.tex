@@ -1,0 +1,200 @@
+\setcounter{section}{-1}
+
+\section{Preliminaries}
+
+\subsection{Basics}
+
+\defn{Order/Cardinality} denoted as $|A|$ for a set $A$.
+If $A$ is finite, then $|A|$ is the number of elements in $A$.
+
+\defn{Cartesian Product} The Cartesian product of two sets $A$ and $B$ is the collection of elements
+\[
+    A \times B = \set{(a, b) \mid a \in A, b \in B}.
+\]
+
+\begin{groupdef}
+    \defn{Function} Denoted as $f : A \to B$ for sets $A$ and $B$. The value of $f$ at $a$ is denoted as $f(a)$ for all $a \in A$. Moreover, to denote $f(a) = b$, we write $f : a \mapsto b$, or $a \mapsto b$.
+
+    \defn{Domain} The set $A$ in the function $f : A \to B$.
+
+    \defn{Codomain} The set $B$ in the function $f : A \to B$.
+
+    \defn{Range/Image} The subset of $B$ defined as
+    \[
+        f(A) = \set{b \in B \mid f(a) = b \text{ for some } a \in A}.
+    \]
+
+    \defn{Preimage/Inverse Image} For $C \subseteq B$, the subset of $A$ given by
+    \[
+        f\inv(C) = \set{a \in A \mid f(a) \in C}.
+    \]
+
+    \defn{Fiber} For $b \in B$, the preimage of $b$, i.e., $f\inv(b)$.
+\end{groupdef}
+\defn{Identity Map} The function on a set $A$ defined as $\id_A : A \to A$ where $\id_A(a) = a$ for all $a \in A$.
+
+\defn{Composition Map} Given functions $f : A \to B$ and $g : B \to C$, it is the map $g \circ f : A \to C$ is defined as
+\[
+    (g \circ f)(a) = g(f(a)) \quad \text{for all } a \in A.
+\]
+\begin{groupdef}
+    Let $f : A \to B$ be a function.
+
+    \defn{Injective/Injection} for all $a_1, a_2 \in A$, $a_1 \neq a_2$ implies $f(a_1) \neq f(a_2)$.
+
+    \defn{Surjective/Surjection} for all $b \in B$, there exists $a \in A$ such that $f(a) = b$, i.e., $f(A) = B$.
+
+    \defn{Bijective/Bijection} $f$ is both injective and surjective.
+
+    \defn{Left Inverse} A function $g : B \to A$ is a left inverse of $f : A \to B$ if $g \circ f = \id_A$.
+
+    \defn{Right Inverse} A function $h : B \to A$ is a right inverse of $f : A \to B$ if $f \circ h = \id_B$.
+\end{groupdef}
+
+\begin{proposition}[Characterizations of Injectivity, Surjectivity, and Bijectivity]
+    Let $f : A \to B$ be a function.
+    \begin{enumerate}
+        \item $f$ is injective if and only if $f$ has a left inverse.
+        \item $f$ is surjective if and only if $f$ has a right inverse.
+        \item $f$ is a bijection if and only if there exists $g : B \to A$ such that $g \circ f = \id_A$ and $f \circ g = \id_B$.
+        \item If $A$ and $B$ are finite sets with $|A| = |B|$, then the following are equivalent:
+        \begin{enumerate}
+            \item $f$ is bijective. \quad \item $f$ is injective. \quad \item $f$ is surjective.
+        \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+
+\begin{proofnum}
+    \item \rightimp Suppose $f$ has a left inverse $g : B \to A$.
+    Then for all $a_1, a_2 \in A$, if $f(a_1) = f(a_2)$, then
+    \[
+        a_1 = g(f(a_1)) = g(f(a_2)) = a_2,
+    \]
+    so $f$ is injective.
+
+    \leftimp Suppose $f$ is injective.
+    Then for each $b \in f(A)$, there exists a unique $a \in A$ such that $f(a) = b$.
+    Now, fix some $a_0 \in A$. Then we can define a function $g : B \to A$ as
+    \[
+        g(b) = 
+        \begin{cases}
+            a & \text{if } b \in f(A) \text{ and } f(a) = b,\\
+            a_0 & \text{if } b \in B \setminus f(A).
+        \end{cases}
+    \]
+    To see $g$ is well-defined, note that if $b \in f(A)$, then by injectivity of $f$, there is a unique $a \in A$ such that $f(a) = b$.
+    Then for all $a \in A$,
+    \[
+        g(f(a)) = a,
+    \]
+    so $g \circ f = \id_A$ and $g$ is a left inverse of $f$.
+    \item \rightimp Suppose $f$ has a right inverse $h : B \to A$.
+    Then for all $b \in B$, we may set $a = h(b) \in A$.
+    Then $f(a) = f(h(b)) = b$, so $f$ is surjective.
+    
+    \leftimp Suppose $f$ is surjective.
+    Then $f\inv(b)$ is nonempty for all $b \in B$.
+    Define a function $h : B \to A$ by choosing some $a \in f\inv(b)$ for each $b \in B$, where this choice is possible by the axiom of choice.
+    Then for all $b \in B$,
+    \[
+        f(h(b)) = b,
+    \]
+    so $f \circ h = \id_B$ and $h$ is a right inverse of $f$.
+    \item \rightimp Suppose $f$ is bijective.
+    Then by (1) and (2), $f$ has a left inverse $g : B \to A$ and a right inverse $h : B \to A$.
+    Then for all $b \in B$,
+    \[
+        g(b) = g(f(h(b))) = h(b),
+    \]
+    where $g(f(h(b))) = g(b)$ because $f(h(b)) = b$ from $h$ being a right inverse of $f$, and $g(f(h(b))) = h(b)$ because $g$ is a left inverse of $f$.
+    Thus, $g = h$ and $g \circ f = \id_A$ and $f \circ g = \id_B$.
+
+    \leftimp Suppose there exists $g : B \to A$ such that $g \circ f = \id_A$ and $f \circ g = \id_B$.
+    Then by (1) and (2), $f$ is injective and surjective, so $f$ is bijective.
+    \item
+    \begin{itemize}
+        \item If $f$ is bijective, then by (1) and (2), $f$ is injective and surjective.
+        \item If $f$ is injective, then distinct elements of $A$ map to distinct elements of $B$.
+        Since $|A| = |B|$, this implies that $f$ is surjective, so $f$ is bijective.
+        \item If $f$ is surjective, then all elements of $B$ are mapped to by elements of $A$.
+        Since $|A| = |B|$, this implies that $f$ is injective, so $f$ is bijective. \qedhere
+    \end{itemize}
+\end{proofnum}
+
+\defn{Inverse} The function $g : B \to A$ in \cref{prop:0.1} (3), denoted as $f\inv : B \to A$.
+
+\defn{Permutation} A bijection $f : A \to A$.
+
+\defn{Restriction} Let $A \subseteq B$ and $f : B \to C$ be a function.
+The \term{restriction} of $f$ to $A$ is the function $f|_A : A \to C$ defined as
+\[
+    f|_A(a) = f(a) \quad \text{for all } a \in A.
+\]
+
+\defn{Extension} Let $A \subseteq B$ and $g : A \to C$ be a function.
+The \term{extension} of $g$ to $B$ is a function $f : B \to C$ such that $f|_A = g$.
+This function need not be unique, and may not even exist.
+
+\begin{groupdef}
+    Let $A$ be a set.
+
+    \defn{Binary Relation} A subset $R \subseteq A \times A$, where we write $a \sim b$ if $(a, b) \in R$.
+    
+    \defn{Reflexive} A relation $R$ is reflexive if $a \sim a$ for all $a \in A$.
+
+    \defn{Symmetric} A relation $R$ is symmetric if $a \sim b$ implies $b \sim a$ for all $a, b \in A$.
+
+    \defn{Transitive} A relation $R$ is transitive if $a \sim b$ and $b \sim c$ implies $a \sim c$ for all $a, b, c \in A$.
+
+    \defn{Equivalence Relation} A relation $R$ that is reflexive, symmetric, and transitive.
+
+    \defn{Equivalence Class} For $a \in A$, the equivalence class of $a$ is the set
+    \[
+        [a] = \set{b \in A \mid b \sim a}.
+    \]
+    Elements of the $[a]$ are said to be \term{equivalent} to $a$ and are \term{representatives} of $[a]$.
+
+    \defn{Partition} Let $I$ be an indexing set. A partition of $A$ is a collection of nonempty subsets $\set{A_i}_{i \in I}$ such that
+    \begin{enumerate}
+        \item $A = \bigcup_{i \in I} A_i$.
+        \item $A_i \cap A_j = \emptyset$ for all $i, j \in I$ with $i \neq j$.
+    \end{enumerate}
+\end{groupdef}
+
+\begin{proposition}[Fundamental Theorem of Equivalence Relations]
+    Let $A$ be a nonempty set.
+    \begin{enumerate}
+        \item If $\sim$ is an equivalence relation on $A$, then the set of equivalence classes of $\sim$ form a partition of $A$.
+        \item Let $I$ be an indexing set. If $\set{A_i \mid i \in I}$ is a partition of $A$, then there is an equivalence relation on $A$ whose equivalence classes are the sets $A_i$ for $i \in I$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proofnum}
+    \item Let $\sim$ be an equivalence relation on $A$, and put
+    \[
+        B = \bigcup_{a \in A} [a]
+    \]
+    to be the union of all equivalence classes of $\sim$.
+    For any $a \in A$, we have $a \sim a$ by reflexivity, so $a \in [a]$ and thus $a \in B$.
+    Hence, $A \subseteq B$.
+    Conversely, let $b \in B$.
+    Then $b \in [a]$ for some $a \in A$, so $b \sim a$ and thus $b \in A$.
+    Hence, $B \subseteq A$ and thus $A = B$.
+
+    Now, let $a, b \in A$.
+    If $[a] \cap [b] = \emptyset$, then we are done.
+    Otherwise, let $c \in [a] \cap [b]$.
+    Then $c \sim a$ and $c \sim b$, so by symmetry and transitivity, we have $a \sim c$ and $c \sim b$, which implies $a \sim b$.
+    Now, let $x \in [a]$.
+    Then $x \sim a$ and $a \sim b$, so by transitivity, we have $x \sim b$ and thus $x \in [b]$.
+    Hence, $[a] \subseteq [b]$.
+    A similar argument shows that $[b] \subseteq [a]$, so $[a] = [b]$, and thus the equivalence classes of $\sim$ form a partition of $A$.
+    \item Let $\set{A_i \mid i \in I}$ be a partition of $A$.
+    Define a relation $\sim$ on $A$ by $a \sim b$ if and only if there exists $i \in I$ such that $a, b \in A_i$.
+    Then $\sim$ is reflexive because for any $a \in A$, there exists $i \in I$ such that $a \in A_i$, so $a \sim a$.
+    Moreover, $\sim$ is symmetric because if $a \sim b$, then there exists $i \in I$ such that $a, b \in A_i$, so $b \sim a$.
+    Finally, $\sim$ is transitive because if $a \sim b$ and $b \sim c$, then there exist $i, j \in I$ such that $a, b \in A_i$ and $b, c \in A_j$.
+    Since $b \in A_i \cap A_j$, we must have $i = j$ because the $A_i$ are disjoint for $i \neq j$.
+    Hence, $a, c \in A_i$, so $a \sim c$.
+    Therefore, $\sim$ is an equivalence relation, and its equivalence classes are precisely the sets $A_i$ for $i \in I$.
+\end{proofnum}

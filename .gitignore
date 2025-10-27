@@ -1,0 +1,27 @@
+# LaTeX artifacts
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.dpth
+*.md5
+*.auxlock
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
