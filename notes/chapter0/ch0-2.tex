@@ -1,0 +1,106 @@
+\subsection{Properties of the Integers}
+
+\defn{Well-Ordering of $\zbb$} If $A \subseteq \zp$ is nonempty, there exists $a' \in A$ such that $a' \leq a$ for all $a$ in $A$, called the \term{minimal element} of $A$.
+
+\defn{Divides} For $a, b \in \zbb$ with $a \neq 0$, we say that $a$ \term{divides} $b$, denoted $a \mid b$, if there exists $c \in \zbb$ such that $b = ac$.
+Moreover, if $a$ does not divide $b$, we write $a \nmid b$.
+
+\defn{Greatest Common Divisor} Denoted as $(a, b)$ for $a, b \in \zbb$ with $a \neq 0$, it is the unique $d \in \zp$ such that
+\begin{itemize}
+    \item $d \mid a$ and $d \mid b$, and
+    \item if $c \in \zbb$ such that $c \mid a$ and $c \mid b$, then $c \mid d$.
+\end{itemize}
+
+\defn{Relatively Prime} Nonzero $a, b \in \zbb$ such that $(a, b) = 1$.
+
+\defn{Least Common Multiple} Denoted as $\lcm(a, b)$ for $a, b \in \zbb$ with $a \neq 0$, it is the unique $\ell \in \zp$ such that
+\begin{itemize}
+    \item $a \mid \ell$ and $b \mid \ell$, and
+    \item if $c \in \zbb$ such that $a \mid c$ and $b \mid c$, then $\ell \mid c$.
+\end{itemize}
+
+\begin{note}
+    For $a, b \in \zbb$ with $a \neq 0$, we have
+    \[
+        (a, b) \cdot \lcm(a, b) = |ab|.
+    \]
+\end{note}
+
+\defn{The Division Algorithm} For $a, b \in \zbb$ with $b > 0$, there exist unique $q, r \in \zbb$ such that
+\[
+    a = bq + r \quad \text{and} \quad 0 \leq r < b.
+\]
+We say that $q$ is the \term{quotient} and $r$ is the \term{remainder} of the division of $a$ by $b$.
+
+\defn{The Euclidean Algorithm} For $a, b \in \zbb$ with $b > 0$, we can find $(a, b)$ by repeatedly applying the division algorithm to $a$ and $b$ until we reach a remainder of $0$.
+More precisely, we can find $(a, b)$ by finding a sequence of integers $r_0, r_1, \ldots, r_n$ such that
+\begin{align*}
+    a &= bq_0 + r_0, \\
+    b &= r_0q_1 + r_1, \\
+    r_0 &= r_1q_2 + r_2, \\
+    &\vdots \\
+    r_{n-2} &= r_{n-1}q_n + r_n, \\
+    r_{n-1} &= r_nq_{n+1} + 0.
+\end{align*}
+The last nonzero remainder $r_n$ is $(a, b)$.
+
+\defn{$\zbb$-Linear Combination} For $a, b \in \zbb$, an expression of the form $ax + by$ for some $x, y \in \zbb$.
+
+\begin{note}
+    We may reverse the Euclidean algorithm (also known as the extended Euclidean algorithm) to obtain the $\zbb$-linear combination of $a, b$ that equates to $(a, b)$.
+\end{note}
+
+\begin{example}[Calculating a Linear Combination]
+    Let $a = 63$ and $b = 39$. Using the Euclidean algorithm, we find
+    \begin{align*}
+        63 &= 39(1) + 24, \\
+        39 &= 24(1) + 15, \\
+        24 &= 15(1) + 9, \\
+        15 &= 9(1) + 6, \\
+        9 &= 6(1) + 3, \\
+        6 &= 3(2) + 0.
+    \end{align*}
+    Thus, $(63, 39) = 3$. Reversing the Euclidean algorithm, we find
+    \begin{align*}
+        3 &= 9 - 6(1) = 9 - (15 - 9(1))(1) \\
+        &= 9(2) - 15(1) = (24 - 15(1))(2) - 15(1) \\
+        &= 24(2) - 15(3) = 24(2) - (39 - 24(1))(3) \\
+        &= 24(5) - 39(3) = (63 - 39(1))(5) - 39(3) \\
+        &= 63(5) - 39(8).
+    \end{align*}
+\end{example}
+
+\defn{Prime} A nonzero integer $p$ whose only positive divisors are $1$ and $p$.
+
+\defn{Composite} A nonzero integer $n$ that is not prime.
+
+\begin{note}
+    If a prime $p \mid ab$ for some $a, b \in \zbb$, then either $p \mid a$ or $p \mid b$.
+\end{note}
+
+\defn{Fundamental Theorem of Arithmetic} Every integer $n > 1$ can be written as a product of primes, and this factorization is unique up to the order of the factors.
+
+\begin{note}
+    If $n$ has two prime factorizations
+    \[
+        n = \prod_{i=1}^k p_i^{\alpha_i} = \prod_{j=1}^m q_j^{\beta_j}
+    \]
+    for primes $p_i, q_j$ and $\alpha_i, \beta_j \in \zp$, then $k = m$ and, after reordering, $p_i = q_i$ and $\alpha_i = \beta_i$ for all $i$.
+\end{note}
+
+\begin{note}
+    Let $a, b \in \zp$ have prime factorizations
+    \[
+        a = \prod_{i=1}^k p_i^{\alpha_i}, \quad b = \prod_{i=1}^k p_i^{\beta_i}
+    \]
+    where $p_i$ are distinct primes and $\alpha_i, \beta_i \geq 0$. Then
+    \[
+        (a, b) = \prod_{i=1}^k p_i^{\min(\alpha_i, \beta_i)}, \quad \lcm(a, b) = \prod_{i=1}^k p_i^{\max(\alpha_i, \beta_i)}.
+    \]
+\end{note}
+
+\defn{Euler $\phi$-Function} For $n \in \zp$, $\phi(n)$ is the number of integers $k$ such that $1 \leq k \leq n$ and $(k, n) = 1$, along with two properties:
+\begin{itemize}
+    \item For prime $p$ and $\alpha \in \zp$, we have $\phi(p^\alpha) = p^\alpha - p^{\alpha - 1}$.
+    \item For $m, n \in \zp$ such that $(m, n) = 1$, we have $\phi(mn) = \phi(m)\phi(n)$.
+\end{itemize}
