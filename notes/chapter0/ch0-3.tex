@@ -1,0 +1,83 @@
+\subsection{\texorpdfstring{$\intmod$: The Integers Modulo $n$}{Z/nZ: The Integers Modulo n}}
+
+\begin{note}
+    Let $n \in \zp$. Define the relation $\sim$ on $\zbb$ by
+    \[
+        a \sim b \iff n \mid (a - b).
+    \]
+    \begin{itemize}
+        \item Since $a - a = 0$ and $n \mid 0$, we have $a \sim a$ for all $a \in \zbb$.
+        \item If $a \sim b$, then $n \mid (a - b)$, so $nk = a - b$ for some $k \in \zbb$. Then $b - a = -nk$, so $n \mid (b - a)$, and thus $b \sim a$.
+        \item If $a \sim b$ and $b \sim c$, then $n \mid (a - b)$ and $n \mid (b - c)$, so $nk_1 = a - b$ and $nk_2 = b - c$ for some $k_1, k_2 \in \zbb$. Then
+        \[
+            a - c = (a - b) + (b - c) = nk_1 + nk_2 = n(k_1 + k_2),
+        \]
+        so $n \mid (a - c)$, and thus $a \sim c$.
+    \end{itemize}
+\end{note}
+
+\begin{groupdef}
+    \defn{Congruent Modulo $n$} If $a \sim b$, we write $a \equiv b \pmod{n}$.
+
+    \defn{Congruence Class} For $a \in \zbb$, the \term{congruence class of $a$ modulo $n$} is
+    \begin{align*}
+        \bar a &= \set{b \in \zbb \mid b \equiv a \pmod{n}} \\
+        &= \set{a + nk \mid k \in \zbb} \\
+        &= \set{a, a \pm n, a \pm 2n, a \pm 3n, \ldots}.
+    \end{align*}
+
+    \defn{Integers Modulo $n$} The set of all congruence classes modulo $n$ is denoted by $\intmod$.
+    There are precisely $n$ distinct congruence classes modulo $n$, which can be represented by the integers $0, 1, 2, \ldots, n - 1$. Thus,
+    \[
+        \intmod = \set{\bar 0, \bar 1, \ldots, \bar{n - 1}}.
+    \]
+
+    \defn{Modular Arithmetic} For any $\bar a, \bar b \in \intmod$, we define
+    \[
+        \bar a + \bar b = \bar{a + b} \quad \text{and} \quad \bar a \cdot \bar b = \bar{ab},
+    \]
+    i.e., we add and multiply congruence classes by adding and multiplying their representatives, where any representative can be chosen.
+\end{groupdef}
+
+\begin{theorem}[Modular Arithmetic is Well-Defined]
+    The operations of addition and multiplication on $\intmod$ are well-defined, i.e., they do not depend on the choice of representatives.
+    In other words, if $s_1, s_2 \in \zbb$ and $t_1, t_2 \in \zbb$ such that $\bar{s_1} = \bar{s_2}$ and $\bar{t_1} = \bar{t_2}$, then $\bar{s_1 + t_1} = \bar{s_2 + t_2}$ and $\bar{s_1 t_1} = \bar{s_2 t_2}$.
+    More precisely, if
+    \[
+        s_1 \equiv s_2 \pmod{n} \quad \text{and} \quad t_1 \equiv t_2 \pmod{n},
+    \]
+    then
+    \[
+        s_1 + t_1 \equiv s_2 + t_2 \pmod{n} \quad \text{and} \quad s_1 t_1 \equiv s_2 t_2 \pmod{n}.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Suppose $s_1 \equiv s_2 \pmod{n}$ and $t_1 \equiv t_2 \pmod{n}$. Then $n \mid (s_1 - s_2)$ and $n \mid (t_1 - t_2)$, so there exist integers $k_1$ and $k_2$ such that
+    \[
+        s_1 - s_2 = nk_1 \quad \text{and} \quad t_1 - t_2 = nk_2.
+    \]
+    Then
+    \[
+        (s_1 + t_1) - (s_2 + t_2) = (s_1 - s_2) + (t_1 - t_2) = nk_1 + nk_2 = n(k_1 + k_2),
+    \]
+    so $s_1 + t_1 \equiv s_2 + t_2 \pmod{n}$.
+
+    Similarly,
+    \begin{align*}
+        s_1 t_1 - s_2 t_2 &= s_1 t_1 - s_1 t_2 + s_1 t_2 - s_2 t_2 \\
+        &= s_1(t_1 - t_2) + (s_1 - s_2)t_2 \\
+        &= s_1(nk_2) + (nk_1)t_2 \\
+        &= n(s_1 k_2 + k_1 t_2),
+    \end{align*}
+    thus $s_1 t_1 \equiv s_2 t_2 \pmod{n}$.
+\end{proof}
+
+\defn{$\units$} The subset of $\intmod$ consisting of all congruence classes with  multiplicative inverses, i.e.,
+\[
+    \units = \set{\bar a \in \intmod \mid \text{there exists } \bar b \in \intmod \text{ such that } \bar a \cdot \bar b = \bar 1}.
+\]
+
+\begin{proposition}[{$\units = \set{\bar a \in \intmod \mid (a, n) = 1}$}]
+    See Exercises 0.3.12 and 0.3.13.
+\end{proposition}
