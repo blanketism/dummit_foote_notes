@@ -108,10 +108,16 @@ and $\ast$ is defined for all $(g_1, h_1), (g_2, h_2) \in G \times H$ as
         g_1 \star \cdots \star g_n = R(g_1, \ldots, g_i) \star R(g_{i + 1}, \ldots, g_n).
     \]
 
-    To show that $g_1 \star \cdots \star g_n = R(g_1, \ldots, g_n)$, we first show that $R(g_1, \ldots, g_i) \star x = R(g_1, \ldots, g_i, x)$ for any $x \in G$.
+    We first show that
+    \[
+        R(g_1, \ldots, g_i) \star x = R(g_1, \ldots, g_i, x) \text{ for any } x \in G.
+    \]
     We proceed by induction on $i$.
     The base case $i = 1$ is trivial.
-    For $i = 2$, we have $R(g_1, g_2) \star x = (g_1 \star g_2) \star x = g_1 \star (g_2 \star x) = R(g_1, g_2, x)$ by the associativity of $\star$.
+    For $i = 2$, we have 
+    \[
+        R(g_1, g_2) \star x = (g_1 \star g_2) \star x = g_1 \star (g_2 \star x) = R(g_1, g_2, x) \text{ by the associativity of } \star.
+    \]
     Suppose for all $j < i$ that $R(g_1, \ldots, g_j) \star x = R(g_1, \ldots, g_j, x)$ for any $x \in G$.
     Noting that $R(g_1, \ldots, g_i) = g_1 \star R(g_2, \ldots, g_i)$, we have
     \begin{align*}
