@@ -1,0 +1,162 @@
+\section{Introduction to Groups}
+
+\subsection{Basic Axioms and Examples}
+
+\begin{groupdef}
+    \defn{Binary Operation} On a set $G$, it is the function $\star : G \times G \to G$. We write $a \star b$ for $\star(a, b)$, where $a, b \in G$.
+
+    \defn{Associative} A binary operation $\star$ on a set $G$ such that $a \star (b \star c) = (a \star b) \star c$ for all $a, b, c \in G$.
+
+    \defn{Commutative} A binary operation $\star$ on a set $G$ such that $a \star b = b \star a$ for all $a, b \in G$.
+    If $a \star b = b \star a$ for \emph{some} $a, b \in G$, we say that $a$ and $b$ \term{commute}.
+\end{groupdef}
+
+\begin{example}[Binary Operations]
+    \begin{enumerate}
+        \item $+$ and $\cdot$ are associative and commutative binary operations on $\zbb$, $\qbb$, $\rbb$, and $\cbb$.
+        \item $-$ is not a binary operation on $\zp$ since $a - b \notin \zp$ when $a < b$, i.e., $- : \zp \times \zp \to \zp$ is not well-defined.
+        \item The operation of taking cross products in $\rbb^3$ is a non-associative and non-commutative binary operation on $\rbb^3$.
+    \end{enumerate}
+\end{example}
+
+\defn{Closure} Given a binary operation $\star$ on a set $G$ with subset $H \subseteq G$, we say that $H$ is \term{closed under $\star$} if $a \star b \in H$ for all $a, b \in H$.
+
+\defn{Group} An ordered pair $(G, \star)$ for a set $G$ and a binary operation $\star$ on $G$ such that
+\begin{enumerate}
+    \item $\star$ is associative, i.e., $a \star (b \star c) = (a \star b) \star c$ for all $a, b, c \in G$,
+    \item there exists an \term{identity element} $e \in G$ such that $e \star a = a \star e = a$ for all $a \in G$, and
+    \item for each $a \in G$, there exists $a\inv \in G$, called the \term{inverse} of $a$, such that $a \star a\inv = a\inv \star a = e$.
+\end{enumerate}
+
+\defn{Abelian} A group $(G, \star)$ is \term{Abelian} if $\star$ is commutative.
+
+\defn{Finite Group} A group $(G, \star)$ is \term{finite} if $G$ is a finite set.
+
+\begin{example}[Groups]
+    \begin{enumerate}
+        \item $(G, +)$ is an Abelian group for $G = \zbb$, $\qbb$, $\rbb$, and $\cbb$ with $e = 0$ and $a\inv = -a$ for all $a \in G$.
+        \item The axioms of a vector space $V$ imply that $(V, +)$ is an Abelian group for all $n \in \zp$.
+    \end{enumerate}
+\end{example}
+
+\defn{Direct Product} Given groups $(G, \star)$ and $(H, \diamond)$, their \term{direct product} is the group $(G \times H, \ast)$ where
+\[
+    G \times H = \set{(g, h) \mid g \in G, h \in H}
+\]
+and $\ast$ is defined for all $(g_1, h_1), (g_2, h_2) \in G \times H$ as
+\[
+    (g_1, h_1) \ast (g_2, h_2) = (g_1 \star g_2, h_1 \diamond h_2).
+\]
+
+\begin{proposition}[Group Properties]
+    Let $(G, \star)$ be a group.
+    \begin{enumerate}
+        \item The identity element $e \in G$ is unique.
+        \item For each $g \in G$, the inverse $g\inv \in G$ is unique.
+        \item $(g\inv)\inv = g$ for all $g \in G$.
+        \item For all $g, h \in G$, $(g \star h)\inv = h\inv \star g\inv$.
+        \item For any $g_1, \ldots, g_n \in G$, the value of $g_1 \star g_2 \star \cdots \star g_n$ is independent of how the product is parenthesized, also known as the generalized associative law.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proofnum}
+    \item Let $e_1, e_2 \in G$ be identity elements. Then
+    \[
+        e_1 = e_1 \star e_2 = e_2.
+    \]
+    \item Let $g \in G$ and let $g\inv_1, g\inv_2 \in G$ be inverses of $g$. Then
+    \[
+        g\inv_1 = g\inv_1 \star e = g\inv_1 \star (g \star g\inv_2) = (g\inv_1 \star g) \star g\inv_2 = e \star g\inv_2 = g\inv_2.
+    \]
+    \item Note that $g\inv(g\inv)\inv = e = g\inv g$. By the uniqueness of inverses, we have $(g\inv)\inv = g$.
+    \item Let $k = (g \star h)\inv$. Then
+    \[
+        (g \star h) \star k = e.
+    \]
+    Left multiply both sides by $g\inv$ and use the associativity of $\star$ to obtain
+    \begin{align*}
+        g\inv \star ((g \star h) \star k) &= g\inv \star e \\
+        (g\inv \star g) \star (h \star k) &= g\inv \\
+        e \star (h \star k) &= g\inv \\
+        h \star k &= g\inv.
+    \end{align*}
+    Left multiply both sides by $h\inv$ and simplify similarly to obtain
+    \begin{align*}
+        h\inv \star (h \star k) &= h\inv \star g\inv \\
+        (h\inv \star h) \star k &= h\inv \star g\inv \\
+        e \star k &= h\inv \star g\inv \\
+        k &= h\inv \star g\inv.
+    \end{align*}
+    \item We proceed by induction on $n$.
+    The base case $n = 1$ is trivial.
+    For cases $n = 2$ and $n = 3$, the result follows from the associativity of $\star$.
+    Suppose for all $k < n$ that the bracketing of a product of the $k$ elements $h_1 \star \cdots \star h_k$ can be reduced to the form
+    \[
+        h_1 \star (h_2 \star (\cdots \star (h_{k-1} \star h_k)) \cdots).
+    \]
+    
+    For notation, write the product above as $R(h_1, \ldots, h_k)$.
+    Consider a product of $n$ elements $g_1 \star \cdots \star g_n$ with some arbitrary bracketing.
+    Then we can write the product as
+    \[
+        \underbrace{(g_1 \star \cdots \star g_i)}_{i \text{ factors}} \star \underbrace{(g_{i + 1} \star \cdots \star g_n)}_{n-i \text{ factors}}
+    \]
+    for some $1 \leq i < n$.
+    By the inductive hypothesis, we may write the $i$ factors as $R(g_1, \ldots, g_i)$ and the $n-i$ factors as $R(g_{i + 1}, \ldots, g_n)$.
+    Thus, we have
+    \[
+        g_1 \star \cdots \star g_n = R(g_1, \ldots, g_i) \star R(g_{i + 1}, \ldots, g_n).
+    \]
+
+    To show that $g_1 \star \cdots \star g_n = R(g_1, \ldots, g_n)$, we first show that $R(g_1, \ldots, g_i) \star x = R(g_1, \ldots, g_i, x)$ for any $x \in G$.
+    We proceed by induction on $i$.
+    The base case $i = 1$ is trivial.
+    For $i = 2$, we have $R(g_1, g_2) \star x = (g_1 \star g_2) \star x = g_1 \star (g_2 \star x) = R(g_1, g_2, x)$ by the associativity of $\star$.
+    Suppose for all $j < i$ that $R(g_1, \ldots, g_j) \star x = R(g_1, \ldots, g_j, x)$ for any $x \in G$.
+    Noting that $R(g_1, \ldots, g_i) = g_1 \star R(g_2, \ldots, g_i)$, we have
+    \begin{align*}
+        R(g_1, \ldots, g_i) \star x &= (g_1 \star R(g_2, \ldots, g_i)) \star x \\
+        &= g_1 \star (R(g_2, \ldots, g_i) \star x) \\
+        &= g_1 \star R(g_2, \ldots, g_i, x) \\
+        &= R(g_1, \ldots, g_i, x),
+    \end{align*}
+    where the second equality follows from the associativity of $\star$ and the third equality follows from the inductive hypothesis.
+
+    Using the above claim and putting $x = R(g_{i + 1}, \ldots, g_n)$, we have
+    \begin{align*}
+        g_1 \star \cdots \star g_n &= R(g_1, \ldots, g_i) \star R(g_{i + 1}, \ldots, g_n) \\
+        &= R(g_1, \ldots, g_i, R(g_{i + 1}, \ldots, g_n)) \\
+        &= R(g_1, \ldots, g_n),
+    \end{align*}
+    where the last equality follows from the definition of $R$.
+    Thus, by induction, the value of $g_1 \star \cdots \star g_n$ is independent of how the product is parenthesized.
+\end{proofnum}
+
+\begin{note}
+    We may drop the $\star$ symbol and write $gh$ for $g \star h$ when the binary operation is clear from context.
+    Moreover, we may write $g^n$ for the product of $n$ copies of $g \in G$, where $g^0 = e$ and $g^{-n} = (g\inv)^n$ for all $n \in \zp$.
+    Additionally, we may write $1$ for the identity element $e \in G$.
+\end{note}
+
+\begin{proposition}[Left and Right Cancellation Laws]
+    Let $G$ be a group with $g, h \in G$.
+    Then the equations $gs = h$ and $tg = h$ have unique solutions $s, t \in G$, respectively.
+    In particular,
+    \begin{enumerate}
+        \item if $gx = gy$, then $x = y$, and
+        \item if $xh = yh$, then $x = y$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The equation $gs = h$ can be solved by left multiplying both sides by $g\inv$ to obtain $s = g\inv h$, which is unique by the uniqueness of inverses.
+    Similarly, $tg = h$ can be solved to obtain the unique solution $t = hg\inv$.
+
+    The first cancellation law follows from left multiplying both sides of $gx = gy$ by $g\inv$ to obtain $x = y$, and the second cancellation law follows from right multiplying both sides of $xh = yh$ by $h\inv$ to obtain $x = y$.
+\end{proof}
+
+\defn{Order} The smallest $n \in \zp$ for a group element $g \in G$ such that $g^n = 1$, denoted as $|g| = n$.
+If no such $n$ exists, we say that $g$ has \term{infinite order} and write $|g| = \infty$.
+
+\defn{Multiplication/Group Table} Put $G = \set{g_1, g_2, \ldots, g_n}$ with $g_1 = 1$.
+Then the \term{multiplication table} or \term{group table} of $G$ is the $n \times n$ matrix whose $(i, j)$th entry is $g_i g_j$ for all $1 \leq i, j \leq n$.
